@@ -9,8 +9,11 @@ var suggestions = [
   "Develop a basic weather app that fetches weather data based on user input (city or ZIP code) using an API like OpenWeatherMap.",
   "Build a simple calculator with basic arithmetic operations using HTML, CSS, and JavaScript.",
   "Develop a chat application using sockets to enable real-time messaging between multiple clients connected to a central server in nodeJs.",
-  "Build a quiz game with multiple-choice questions, scoring system, and leaderboard."
-  ];
+  "Build a quiz game with multiple-choice questions, scoring system, and leaderboard.",
+  "Create a simple PHP script to store and retrieve user data, like a registration form or a profile page",
+  "Design a simple ATM machine simulation in C, allowing users to check balance, deposit, and withdraw funds",
+  "Create a simple calculator app in Python that performs basic arithmetic operations",
+];
 let randomSuggestion = "";
 function shuffleSuggestion(){
 randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
