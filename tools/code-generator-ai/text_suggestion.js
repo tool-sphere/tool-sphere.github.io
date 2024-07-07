@@ -13,6 +13,8 @@ var suggestions = [
   "Create a simple PHP script to store and retrieve user data, like a registration form or a profile page",
   "Design a simple ATM machine simulation in C, allowing users to check balance, deposit, and withdraw funds",
   "Create a simple calculator app in Python that performs basic arithmetic operations",
+  "Create a simple calculator app in Node.JS that performs basic arithmetic operations",
+  "Create a simple calculator app in Js that performs basic arithmetic operations",
 ];
 let randomSuggestion = "";
 function shuffleSuggestion(){
