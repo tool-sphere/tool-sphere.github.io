@@ -68,6 +68,8 @@ body {
   margin: 0 auto;
   margin-bottom: 2px;
   width: 95%;
+  min-width: 95%;
+  max-width: 95%;
 }
 
 .nav > .nav-links > a:hover { 
