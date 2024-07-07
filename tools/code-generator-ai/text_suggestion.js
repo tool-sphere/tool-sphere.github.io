@@ -15,6 +15,9 @@ var suggestions = [
   "Create a simple calculator app in Python that performs basic arithmetic operations",
   "Create a simple calculator app in Node.JS that performs basic arithmetic operations",
   "Create a simple calculator app in Js that performs basic arithmetic operations",
+  "How To Run A Telegram Bot In Nodejs",
+  "Which Module Is Best To Run Discord Bots",
+  "Recomend A Python Module / Package To Run Discord Bots",
 ];
 let randomSuggestion = "";
 function shuffleSuggestion(){
