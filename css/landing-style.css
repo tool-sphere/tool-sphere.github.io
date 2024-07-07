@@ -63,13 +63,15 @@ body {
   padding: 13px 10px 13px 10px;
   text-decoration: none;
   color: #efefef;
-  margin-bottom: 2px;
   border-radius: 8px;
   border: 0.5px solid white;
+  margin: 0 auto;
+  margin-bottom: 2px;
+  width: 95%;
 }
 
-.nav > .nav-links > a:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+.nav > .nav-links > a:hover { 
+  transform: scale(1.05);
 }
 
 .nav > #nav-check {
@@ -102,19 +104,15 @@ body {
   .nav > .nav-links {
     position: absolute;
     display: block;
-    width: 95%;
+    width: 99%;
     background-color: #333;
     height: 0px;
     transition: all 0.3s ease-in;
     overflow-y: hidden;
     top: 50px;
     left: 0px;
-    margin: 0 auto;
   }
-.nav-links a:hover {
-  margin: 0 auto;
-  transform: scale(1.05);
-}
+
   .nav > .nav-links > a {
     display: block;
     width: 100%;
