@@ -12,24 +12,22 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // Your React code here
-        const e = React.createElement;
-        let ii = Date.now();
-        setInterval(() => {
-            ii = Date.now();
-        }, 1000);
-        class App extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = { name: ii };
-            }
+        const { useState, useEffect } = React;
 
-            render() {
-                return e('div', null, `Hello, ${this.state.name}!`);
-            }
+        function App() {
+            const [time, setTime] = useState(Date.now());
+
+            useEffect(() => {
+                const interval = setInterval(() => {
+                    setTime(Date.now());
+                }, 1000);
+                return () => clearInterval(interval);
+            }, []);
+
+            return <div>Hello, {new Date(time).toLocaleTimeString()}!</div>;
         }
 
-        ReactDOM.render(e(App), document.getElementById('root'));
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
