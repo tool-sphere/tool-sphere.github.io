@@ -139,6 +139,7 @@ text-shadow: 0.5px 0.5px 0px purple;
     
 𝘾𝙡𝙞𝙘𝙠 𝙏𝙤 𝙂𝙚𝙩 𝙎𝙤𝙢𝙚 𝙎𝙪𝙜𝙜𝙚𝙨𝙩𝙞𝙤𝙣" id="prmpt" style="margin-top: 4px; width: 90%; height: 200px; background-color: transparent; color: white; border: 1px solid gray; border-radius: 10px; padding: 16px; outline: none;"></textarea>
   <br>
+  <span id='codeCountToday'> Total Code generated today: loading...</span> <br>
   <button onclick="window.location.href='https://tool-sphere.github.io/tools/code-generator-ai/old/'">🔙 Back to Old Model ( Not Recommended! )</button>
   <button id="genbtn" onclick="generate()" style="margin-top: 10px; width: 70%; height: 3em; background-color: transparent; color: black; font-size: 2em; border-radius: 12px; border: 1px gold solid; margin-bottom: 18px;
     box-shadow: rgba(69, 192, 245, 0.25) 0px 30px 60px -12px inset, rgba(69, 192, 245, 0.3) 0px 18px 36px -18px inset; color: white;">
@@ -205,6 +206,20 @@ your output will show here
     var gcode = document.querySelector("#gcode");
   //  var editor = ace.edit("editor");
 //editor.setReadOnly(true);
+    var counter = document.querySelector('#codeCountToday');
+// Total Code generated today:
+function updateCount(countNow) {
+  counter.innerHTML = `Total Code generated today: ${countNow}`;
+};
+
+function incriCount(get) {
+  fetch(`/count${get ?  "?getOnly=true" : ""}`).then(data => data.json()).then(data => {
+    updateCount(data.count);
+  }).catch(console.log);
+}
+
+incriCount(true);
+    
     var gh = document.querySelector("#bang");
     function generate(){
       if(!prompt_.value || prompt_.value.trim() === ""){
@@ -238,6 +253,7 @@ fetch("https://estatic-node-api.onrender.com/tool-sphere/api/code-gen", {
     }
 })
 .then(data => {
+  incriCount();
   editor.innerHTML = marked.parse(`${data.msg.replace(/<\|im_end\|>\s*$/, "")}`);
   hljs.highlightAll(); 
   prompt_.disabled = false;
