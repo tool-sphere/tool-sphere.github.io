@@ -213,7 +213,7 @@ function updateCount(countNow) {
 };
 
 function incriCount(get) {
-  fetch(`/count${get ?  "?getOnly=true" : ""}`).then(data => data.json()).then(data => {
+  fetch(`https://tool-sphere.onrender.com/count${get ?  "?getOnly=true" : ""}`).then(data => data.json()).then(data => {
     updateCount(data.count);
   }).catch(console.log);
 }
