@@ -298,7 +298,7 @@
     incriViews(true);
     try {
       if (localStorage.getItem('today_viewed')) {
-        let lastViewed = localStorage.getItem('today_viewed');
+        let lastViewed = parseInt(localStorage.getItem('today_viewed'));
         let lastViewedDate = new Date(lastViewed);
         let today = new Date();
         today.setHours(0, 0, 0, 0);
