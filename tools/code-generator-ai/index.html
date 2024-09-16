@@ -309,7 +309,8 @@
         if (differenceInDays === 0) {
           //do nothing
         } else {
-          incriViews();
+        localStorage.setItem('today_viewed', Date.now());
+        incriViews();
         }
       } else {
         localStorage.setItem('today_viewed', Date.now());
