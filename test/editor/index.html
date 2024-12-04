@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Editor</title>
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+    }
+    #editor {
+      flex-grow: 1;
+      height: calc(100vh - 50px);
+    }
+    #toolbar {
+      display: flex;
+      justify-content: space-around;
+      background-color: #333;
+      color: white;
+      padding: 10px;
+    }
+    button {
+      background-color: #555;
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div id="toolbar">
+    <button id="openFile">Open File</button>
+    <button id="saveChanges">Save Changes</button>
+  </div>
+  <div id="editor">/* Start coding here... */</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js"></script>
+  <script>
+    const editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/javascript");
+    editor.setOptions({ fontSize: "14px" });
+
+    let fileHandle = null;
+    let writableStream = null;
+
+    async function openFile() {
+      if (!window.showOpenFilePicker) {
+        alert("Your browser does not support the File System Access API. Please use Chrome or Edge.");
+        return;
+      }
+
+      try {
+        [fileHandle] = await window.showOpenFilePicker();
+        const file = await fileHandle.getFile();
+        const contents = await file.text();
+        editor.setValue(contents, -1);
+        writableStream = await fileHandle.createWritable();
+        alert("File loaded. You can now make changes and save.");
+      } catch (error) {
+        console.error("Error opening file:", error);
+        alert("Failed to open file. Please try again.");
+      }
+    }
+
+    async function saveChanges() {
+      if (!writableStream) {
+        alert("No file loaded to save changes.");
+        return;
+      }
+      try {
+        const updatedContent = editor.getValue();
+        await writableStream.seek(0);
+        await writableStream.write(updatedContent);
+        await writableStream.truncate(updatedContent.length);
+        alert("Changes saved successfully!");
+      } catch (error) {
+        console.error("Error saving file:", error);
+        alert("Failed to save changes. Please try again.");
+      }
+    }
+
+    document.getElementById("openFile").addEventListener("click", openFile);
+    document.getElementById("saveChanges").addEventListener("click", saveChanges);
+
+    window.addEventListener("beforeunload", () => {
+      if (writableStream) writableStream.close();
+    });
+  </script>
+</body>
+</html>
